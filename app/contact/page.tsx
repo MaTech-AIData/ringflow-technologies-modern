@@ -381,15 +381,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 bg-black px-5 py-6 text-center text-sm text-neutral-400">
-        <p>
-          © {new Date().getFullYear()} Ring Flow{" "}
-          <span className="font-semibold text-red-500">Technologies</span>.
-          All rights reserved.
-        </p>
-        <p className="mt-2">Every call matters.</p>
-      </footer>
+
     </main>
   );
 }
