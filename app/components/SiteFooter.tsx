@@ -13,7 +13,7 @@ export default function SiteFooter() {
         <a href="/contact">Contact</a>
       </div>
       <small>
-        © {new Date().getFullYear()} Ring Flow Technologies.
+        © 2026 Ring Flow Technologies.
         All rights reserved.
       </small>
     </footer>
