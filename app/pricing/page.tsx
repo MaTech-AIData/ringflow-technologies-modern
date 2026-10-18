@@ -361,100 +361,124 @@ export default function PricingPage() {
       {/* =====================================================
           WHAT YOU WILL GET — ICON CARDS
       ===================================================== */}
-      <section className="pricing-benefits-section">
-        <div className="pricing-container">
-          <div className="pricing-section-heading">
-            <span className="pricing-eyebrow">
-              MORE THAN A PHONE NUMBER
-            </span>
+         <section className="pricing-benefits-section">
+  <div className="pricing-container">
+    <div className="pricing-section-heading">
+      <span className="pricing-eyebrow">
+        MORE THAN A PHONE NUMBER
+      </span>
 
-            <h2>
-              Take Control of your calls
-            </h2>
+      <h2>Everything Your Business Needs</h2>
 
-            <p>
-              Improve accountability, track performance, 
-              and never miss an opportunity
-            </p>
-          </div>
+      <p>
+       Powerful communication tools designed to keep your team connected,
+            productive and focused on your customers.
+      </p>
+    </div>
 
-          <div className="pricing-benefits-grid">
-            {pricingFeatures.map((feature) => {
-              const Icon = feature.icon;
-
-              return (
-                <article
-                  className="pricing-benefit-card"
-                  key={feature.number}
-                >
-                  <div className="pricing-benefit-top">
-                    <span className="pricing-benefit-number">
-                      {feature.number}
-                    </span>
-
-                    <span className="pricing-benefit-icon">
-                      <Icon
-                        size={27}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </div>
-
-                  <h3>{feature.title}</h3>
-
-                  <p>{feature.description}</p>
-
-            <h3>One Business Number</h3>
-
-            <p>
-                One professional number for all your business communication,
-                making it easier for customers to reach your team.
-            </p>
-            <h3>Real-Time Call Monitoring</h3>
-
-            <p>
-                Monitor calls in real time and manage your team's communication
-                through a powerful and easy-to-use dashboard.
-            </p>
-             <h3>Detailed Call Reports</h3>
-
-            <p>
-                Get detailed reports and performance analytics that help you
-                understand activity and make better business decisions.
-            </p>
-               <h3>Better Customer Experience</h3>
-
-            <p>
-                Improve customer interactions while giving your team the tools
-                they need to communicate and work more efficiently.
-            </p>
-             <h3>Scalable & Easy to Use</h3>
-
-            <p>
-                A simple communication platform that grows with your business,
-                from a small team to a growing organization.
-            </p>
-            <h3>Secure & Reliable Platform</h3>
-
-            <p>
-                Dependable communication built to keep your business connected
-                with security and reliability at its core.
-            </p>
-
-
-                </article>
-              );
-            })}
-          </div>
-
-          <p className="pricing-features-note">
-            Feature availability depends on the selected package
-            and supported integrations. Contact us to confirm
-            which features are available for your business.
-          </p>
+    <div className="pricing-benefits-grid">
+      <article className="pricing-benefit-card">
+        <div className="pricing-benefit-icon">
+          <PhoneCall size={27} aria-hidden="true" />
         </div>
-      </section>
+
+        <h3>One Business Number</h3>
+
+        <p>
+          One professional number for all your business
+          communication, making it easier for customers
+          to reach your team.
+        </p>
+
+        <div className="get-line" />
+      </article>
+
+      <article className="pricing-benefit-card">
+        <div className="pricing-benefit-icon">
+          <Headphones size={27} aria-hidden="true" />
+        </div>
+
+        <h3>Real-Time Call Monitoring</h3>
+
+        <p>
+          Monitor calls in real time and manage your team&apos;s
+          communication through a powerful and easy-to-use
+          dashboard.
+        </p>
+
+        <div className="get-line" />
+      </article>
+
+      <article className="pricing-benefit-card">
+        <div className="pricing-benefit-icon">
+          <ChartNoAxesCombined size={27} aria-hidden="true" />
+        </div>
+
+        <h3>Detailed Call Reports</h3>
+
+        <p>
+          Get detailed reports and performance analytics that
+          help you understand activity and make better
+          business decisions.
+        </p>
+
+        <div className="get-line" />
+      </article>
+
+      <article className="pricing-benefit-card">
+        <div className="pricing-benefit-icon">
+          <Users size={27} aria-hidden="true" />
+        </div>
+
+        <h3>Better Customer Experience</h3>
+
+        <p>
+          Improve customer interactions while giving your team
+          the tools they need to communicate and work more
+          efficiently.
+        </p>
+
+        <div className="get-line" />
+      </article>
+
+      <article className="pricing-benefit-card">
+        <div className="pricing-benefit-icon">
+          <TrendingUp size={27} aria-hidden="true" />
+        </div>
+
+        <h3>Scalable &amp; Easy to Use</h3>
+
+        <p>
+          A simple communication platform that grows with your
+          business, from a small team to a growing organization.
+        </p>
+
+        <div className="get-line" />
+      </article>
+
+      <article className="pricing-benefit-card">
+        <div className="pricing-benefit-icon">
+          <ShieldCheck size={27} aria-hidden="true" />
+        </div>
+
+        <h3>Secure &amp; Reliable Platform</h3>
+
+        <p>
+          Dependable communication built to keep your business
+          connected, with security and reliability at its core.
+        </p>
+
+        <div className="get-line" />
+      </article>
+    </div>
+
+    <p className="pricing-features-note">
+      Feature availability depends on the selected package
+      and supported integrations. Contact us to confirm which
+      features are available for your business.
+    </p>
+  </div>
+</section>
 
       {/* =====================================================
           VALUE SECTION
