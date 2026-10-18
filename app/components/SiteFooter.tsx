@@ -15,6 +15,7 @@ export default function SiteFooter() {
 
       {/* BRAND TAGLINE */}
       <p>Every call matters.</p>
+      <p>Grow your business with every call</p>
 
       {/* FOOTER NAVIGATION */}
       <nav

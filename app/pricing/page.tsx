@@ -369,13 +369,12 @@ export default function PricingPage() {
             </span>
 
             <h2>
-              Everything Your Business Needs
+              Take Control of your calls
             </h2>
 
             <p>
-              Explore the communication tools and capabilities
-              designed to help your team manage customer
-              interactions more effectively.
+              Improve accountability, track performance, 
+              and never miss an opportunity
             </p>
           </div>
 
@@ -406,16 +405,44 @@ export default function PricingPage() {
 
                   <p>{feature.description}</p>
 
-                  <div className="pricing-benefit-bottom">
-                    <span>Explore capabilities</span>
+            <h3>One Business Number</h3>
 
-                    <span className="pricing-benefit-arrow">
-                      <ArrowRight
-                        size={17}
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </div>
+            <p>
+                One professional number for all your business communication,
+                making it easier for customers to reach your team.
+            </p>
+            <h3>Real-Time Call Monitoring</h3>
+
+            <p>
+                Monitor calls in real time and manage your team's communication
+                through a powerful and easy-to-use dashboard.
+            </p>
+             <h3>Detailed Call Reports</h3>
+
+            <p>
+                Get detailed reports and performance analytics that help you
+                understand activity and make better business decisions.
+            </p>
+               <h3>Better Customer Experience</h3>
+
+            <p>
+                Improve customer interactions while giving your team the tools
+                they need to communicate and work more efficiently.
+            </p>
+             <h3>Scalable & Easy to Use</h3>
+
+            <p>
+                A simple communication platform that grows with your business,
+                from a small team to a growing organization.
+            </p>
+            <h3>Secure & Reliable Platform</h3>
+
+            <p>
+                Dependable communication built to keep your business connected
+                with security and reliability at its core.
+            </p>
+
+
                 </article>
               );
             })}
@@ -444,8 +471,9 @@ export default function PricingPage() {
               <br />
               One Platform.
               <br />
-              Better Connections.
+              Total Control
             </h2>
+            <p>Grow your business with every call.</p>
           </div>
 
           <div className="pricing-value-content">

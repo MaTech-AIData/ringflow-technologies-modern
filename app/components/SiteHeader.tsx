@@ -9,7 +9,7 @@ export default function SiteHeader() {
       <Link
         href="/"
         className="brand"
-        aria-label="RingFlow Technologies home"
+        aria-label="Ring Flow Technologies home"
       >
         <img
           src={assetPath("ringflow_logo.png")}
@@ -18,7 +18,7 @@ export default function SiteHeader() {
         />
 
         <span className="brand-name">
-          <span className="brand-title">RINGFLOW</span>
+          <span className="brand-title">RING FLOW</span>
           <span className="brand-subtitle">
             TECHNOLOGIES
           </span>

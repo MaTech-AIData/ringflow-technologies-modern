@@ -27,12 +27,10 @@ const solutions = [
 ];
 
 const features = [
-  "Incoming and outgoing calls",
-  "Missed-call monitoring",
-  "Lead allocation and tracking",
-  "WhatsApp conversations",
-  "Instagram chats",
-  "Team shift management",
+  "One Number for your entire team",
+  "Real-Time monitoring and reporting",
+  "Better Service, happier clients, stronger results",
+  "Secure & Reliable communication"
 ];
 
 export default function HomePage() {
