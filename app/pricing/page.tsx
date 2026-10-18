@@ -1,315 +1,595 @@
 import Link from "next/link";
+import {
+  Phone,
+  PhoneCall,
+  Headphones,
+  PhoneMissed,
+  ChartNoAxesCombined,
+  Users,
+  MessageCircle,
+  Camera,
+  CalendarClock,
+  Settings,
+  TrendingUp,
+  Check,
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  CircleHelp,
+} from "lucide-react";
 
-const features = [
+const pricingFeatures = [
   {
-    icon: "☎",
+    number: "01",
     title: "One Business Number",
     description:
-      "One professional number for all your business communication, making it easier for customers to reach your team.",
+      "Give your business one professional number for managing customer calls and connecting with your team.",
+    icon: Phone,
   },
   {
-    icon: "◉",
-    title: "Real-Time Call Monitoring",
+    number: "02",
+    title: "Incoming & Outgoing Calls",
     description:
-      "Monitor calls in real time and manage your team's communication through a powerful and easy-to-use dashboard.",
+      "Manage incoming and outgoing calls through a connected business communication platform.",
+    icon: PhoneCall,
   },
   {
-    icon: "▤",
-    title: "Detailed Call Reports",
+    number: "03",
+    title: "Missed-Call Monitoring",
     description:
-      "Get detailed reports and performance analytics that help you understand activity and make better business decisions.",
+      "Keep track of missed calls and help your team follow up with customers and opportunities.",
+    icon: PhoneMissed,
   },
   {
-    icon: "♡",
-    title: "Better Customer Experience",
+    number: "04",
+    title: "Call Analytics & Reports",
     description:
-      "Improve customer interactions while giving your team the tools they need to communicate and work more efficiently.",
+      "Review call activity and use communication insights to support better business decisions.",
+    icon: ChartNoAxesCombined,
   },
   {
-    icon: "↗",
-    title: "Scalable & Easy to Use",
+    number: "05",
+    title: "Lead Management",
     description:
-      "A simple communication platform that grows with your business, from a small team to a growing organization.",
+      "Organize customer enquiries, allocate leads to team members, and track follow-ups.",
+    icon: Users,
   },
   {
-    icon: "◇",
-    title: "Secure & Reliable Platform",
+    number: "06",
+    title: "WhatsApp Conversations",
     description:
-      "Dependable communication built to keep your business connected with security and reliability at its core.",
+      "Manage customer conversations through supported WhatsApp integrations.",
+    icon: MessageCircle,
+  },
+  {
+    number: "07",
+    title: "Instagram Conversations",
+    description:
+      "Manage customer enquiries through supported Instagram integrations.",
+    icon: Camera,
+  },
+  {
+    number: "08",
+    title: "Team Shift Management",
+    description:
+      "Organize communication responsibilities around your team's working shifts.",
+    icon: CalendarClock,
+  },
+  {
+    number: "09",
+    title: "Setup & Team Training",
+    description:
+      "Get initial platform setup and team training as part of the installation package.",
+    icon: Settings,
+  },
+  {
+    number: "10",
+    title: "Business Scalability",
+    description:
+      "Build an organized communication workflow that can grow alongside your business.",
+    icon: TrendingUp,
+  },
+];
+
+const pricingFaqs = [
+  {
+    question: "Is the installation fee a one-time payment?",
+    answer:
+      "Yes. The listed installation fee is KSh 40,000, payable once. Initial setup and team training are included in the installation package.",
+  },
+  {
+    question: "How much is the monthly subscription?",
+    answer:
+      "The listed subscription is KSh 9,500 per agent per month, with a minimum of two agents. For two agents, the monthly subscription totals KSh 19,000.",
+  },
+  {
+    question: "Is airtime included in the monthly fee?",
+    answer:
+      "Airtime is billed separately according to usage. Contact our team to discuss your expected call volume and airtime requirements.",
+  },
+  {
+    question: "Can I get a package for my business size?",
+    answer:
+      "Contact Ring Flow Technologies to discuss your team size, communication needs, and any specific requirements.",
+  },
+  {
+    question: "How do I get started?",
+    answer:
+      "Use the Get Started button to contact our team. We can discuss your requirements, explain the setup process, and help you determine the right package.",
   },
 ];
 
 export default function PricingPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-black">
-      {/* Pricing hero */}
-      <section className="relative isolate overflow-hidden bg-black">
-        <div className="absolute -right-20 -top-24 -z-10 h-80 w-80 rounded-full bg-red-600/20 blur-3xl" />
-        <div className="absolute -bottom-32 left-10 -z-10 h-80 w-80 rounded-full bg-red-500/15 blur-3xl" />
-
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-10 lg:py-24">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-red-500/40 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-400">
-              <span className="h-2 w-2 rounded-full bg-red-500" />
-              Transparent Pricing
+    <main className="pricing-page">
+      {/* =====================================================
+          HERO SECTION
+      ===================================================== */}
+      <section className="pricing-hero">
+        <div className="pricing-container">
+          <div className="pricing-hero-content">
+            <span className="pricing-eyebrow">
+              TRANSPARENT. FLEXIBLE. BUSINESS-FOCUSED.
             </span>
 
-            <h1 className="mt-7 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-7xl">
-              SIMPLE
-              <span className="block text-red-500">PRICING</span>
+            <h1>
+              Simple Pricing.
+              <br />
+              <span>Powerful Communication.</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-neutral-300 sm:text-lg">
-              Everything your business needs to stay connected, manage
-              customer communication, and keep your team productive.
+            <p className="pricing-hero-description">
+              Everything your team needs to manage calls, customers,
+              leads, and conversations through one connected
+              communication platform.
             </p>
 
-            <a
-              href="#pricing-details"
-              className="mt-9 inline-flex items-center gap-3 rounded-xl bg-red-600 px-6 py-4 font-bold text-white transition hover:bg-red-700"
-            >
-              View Pricing <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing details */}
-      <section
-        id="pricing-details"
-        className="scroll-mt-8 px-6 py-16 sm:px-10 lg:py-24"
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-14 max-w-2xl text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-              Our Pricing
-            </p>
-
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Straightforward pricing for your business
-            </h2>
-
-            <p className="mt-4 leading-7 text-neutral-600">
-              Get started with a one-off installation, a monthly
-              fee per agent, and airtime billed according to usage.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {/* Installation */}
-            <article className="flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-red-400 hover:shadow-xl sm:p-8">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-3xl text-red-600">
-                ⚙
-              </div>
-
-              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-red-600">
-                One-off payment
-              </p>
-
-              <h3 className="mt-3 text-xl font-bold">
-                Installation (One-off)
-              </h3>
-
-              <div className="mt-6">
-                <p className="text-3xl font-bold tracking-tight sm:text-4xl">
-                  KSh 40,000
-                </p>
-                <p className="mt-3 text-sm leading-6 text-neutral-500">
-                  Inclusive of training
-                </p>
-              </div>
-
-              <div className="mt-7 flex-1 border-t border-neutral-100 pt-6">
-                <p className="flex items-start gap-3 text-sm leading-6 text-neutral-600">
-                  <span className="font-bold text-red-600">✓</span>
-                  Installation with training included
-                </p>
-              </div>
+            <div className="pricing-hero-actions">
+              <Link
+                href="/contact/"
+                className="pricing-button pricing-button-primary"
+              >
+                Get Started <ArrowRight size={18} />
+              </Link>
 
               <Link
-                href="/contact"
-                className="mt-8 flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3.5 text-center font-semibold text-white transition hover:bg-red-600"
+                href="/solutions/"
+                className="pricing-button pricing-button-outline"
               >
-                Enquire Now <span aria-hidden="true">→</span>
+                Explore Solutions
               </Link>
-            </article>
+            </div>
 
-            {/* Monthly fee */}
-            <article className="relative flex h-full flex-col rounded-3xl border-2 border-red-600 bg-black p-7 text-white shadow-xl shadow-red-900/10 transition duration-300 hover:-translate-y-1 sm:p-8">
-              <span className="absolute -top-3 left-7 rounded-full bg-red-600 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-                Per Agent
+            <div className="pricing-trust-points">
+              <span>
+                <Check size={17} /> One connected platform
               </span>
 
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-3xl text-red-400">
-                👥
-              </div>
+              <span>
+                <Check size={17} /> Initial team training
+              </span>
 
-              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-red-400">
-                Recurring payment
-              </p>
-
-              <h3 className="mt-3 text-xl font-bold">
-                Monthly Fee per Agent
-              </h3>
-
-              <div className="mt-6">
-                <p className="text-3xl font-bold tracking-tight sm:text-4xl">
-                  KSh 9,500
-                </p>
-                <p className="mt-3 text-sm leading-6 text-neutral-300">
-                  Minimum of 2 agents
-                </p>
-              </div>
-
-              <div className="mt-7 flex-1 border-t border-white/10 pt-6">
-                <p className="flex items-start gap-3 text-sm leading-6 text-neutral-200">
-                  <span className="font-bold text-red-400">✓</span>
-                  Monthly fee per agent
-                </p>
-                <p className="mt-4 flex items-start gap-3 text-sm leading-6 text-neutral-200">
-                  <span className="font-bold text-red-400">✓</span>
-                  Minimum of 2 agents
-                </p>
-              </div>
-
-              <Link
-                href="/contact"
-                className="mt-8 flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3.5 text-center font-semibold text-white transition hover:bg-red-700"
-              >
-                Get Started <span aria-hidden="true">→</span>
-              </Link>
-            </article>
-
-            {/* Airtime */}
-            <article className="flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-red-400 hover:shadow-xl sm:p-8">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-3xl text-red-600">
-                ◷
-              </div>
-
-              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-red-600">
-                Flexible usage
-              </p>
-
-              <h3 className="mt-3 text-xl font-bold">Airtime</h3>
-
-              <div className="mt-6">
-                <p className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  PAY AS YOU USE
-                </p>
-                <p className="mt-3 text-sm leading-6 text-neutral-500">
-                  Billed on usage
-                </p>
-              </div>
-
-              <div className="mt-7 flex-1 border-t border-neutral-100 pt-6">
-                <p className="flex items-start gap-3 text-sm leading-6 text-neutral-600">
-                  <span className="font-bold text-red-600">✓</span>
-                  Airtime billed according to usage
-                </p>
-              </div>
-
-              <Link
-                href="/contact"
-                className="mt-8 flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-black px-4 py-3.5 text-center font-semibold text-white transition hover:bg-red-600"
-              >
-                Make an Enquiry <span aria-hidden="true">→</span>
-              </Link>
-            </article>
+              <span>
+                <Check size={17} /> Usage-based airtime
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bg-neutral-50 px-6 py-16 sm:px-10 lg:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-600">
-              WHAT YOU GET
-            </p>
+      {/* =====================================================
+          PRICING PLANS
+      ===================================================== */}
+      <section
+        className="pricing-section"
+        id="pricing-plans"
+      >
+        <div className="pricing-container">
+          <div className="pricing-section-heading">
+            <span className="pricing-eyebrow">
+              OUR PRICING
+            </span>
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+            <h2>Know What You Pay For</h2>
+
+            <p>
+              Start with professional setup, support your team with
+              a monthly subscription, and pay for airtime according
+              to usage.
+            </p>
+          </div>
+
+          <div className="pricing-cards">
+            {/* INSTALLATION CARD */}
+            <article className="pricing-card">
+              <div className="pricing-card-icon">
+                <Settings size={27} />
+              </div>
+
+              <p className="pricing-card-label">
+                ONE-TIME PAYMENT
+              </p>
+
+              <h3>Installation & Setup</h3>
+
+              <p className="pricing-card-description">
+                Get your communication platform set up and your
+                team prepared to use it.
+              </p>
+
+              <div className="pricing-amount">
+                <span>KSh</span> 40,000
+              </div>
+
+              <p className="pricing-billing-note">
+                Paid once
+              </p>
+
+              <div className="pricing-divider" />
+
+              <h4>What you get</h4>
+
+              <ul className="pricing-check-list">
+                <li>Platform installation and setup</li>
+                <li>Initial configuration</li>
+                <li>Team training</li>
+                <li>Getting-started guidance</li>
+              </ul>
+
+              <Link
+                href="/contact/"
+                className="pricing-button pricing-button-dark"
+              >
+                Discuss Installation <ArrowRight size={17} />
+              </Link>
+            </article>
+
+            {/* MONTHLY SUBSCRIPTION CARD */}
+            <article className="pricing-card pricing-card-featured">
+              <div className="pricing-popular-badge">
+                CORE SUBSCRIPTION
+              </div>
+
+              <div className="pricing-card-icon">
+                <Zap size={27} />
+              </div>
+
+              <p className="pricing-card-label">
+                MONTHLY SUBSCRIPTION
+              </p>
+
+              <h3>Per-Agent Plan</h3>
+
+              <p className="pricing-card-description">
+                Equip your team with connected communication tools
+                for managing customer interactions.
+              </p>
+
+              <div className="pricing-amount">
+                <span>KSh</span> 9,500
+              </div>
+
+              <p className="pricing-billing-note">
+                Per agent, per month
+              </p>
+
+              <div className="pricing-minimum">
+                Minimum of 2 agents
+              </div>
+
+              <div className="pricing-divider" />
+
+              <h4>Core capabilities</h4>
+
+              <ul className="pricing-check-list">
+                <li>Business communication platform</li>
+                <li>Incoming and outgoing call management</li>
+                <li>Call monitoring and reporting</li>
+                <li>Missed-call tracking</li>
+                <li>Lead allocation and tracking</li>
+                <li>Team communication tools</li>
+              </ul>
+
+              <Link
+                href="/contact/"
+                className="pricing-button pricing-button-primary pricing-full-button"
+              >
+                Get Started Today <ArrowRight size={17} />
+              </Link>
+            </article>
+
+            {/* AIRTIME CARD */}
+            <article className="pricing-card">
+              <div className="pricing-card-icon">
+                <PhoneCall size={27} />
+              </div>
+
+              <p className="pricing-card-label">
+                FLEXIBLE USAGE
+              </p>
+
+              <h3>Airtime</h3>
+
+              <p className="pricing-card-description">
+                Manage your calling expenditure according to your
+                business communication usage.
+              </p>
+
+              <div className="pricing-amount pricing-usage-amount">
+                PAY AS
+                <br />
+                YOU USE
+              </div>
+
+              <p className="pricing-billing-note">
+                Billed according to usage
+              </p>
+
+              <div className="pricing-divider" />
+
+              <h4>How it works</h4>
+
+              <ul className="pricing-check-list">
+                <li>Usage-based billing</li>
+                <li>Flexible communication spending</li>
+                <li>Suitable for different call volumes</li>
+                <li>Discuss your requirements with our team</li>
+              </ul>
+
+              <Link
+                href="/contact/"
+                className="pricing-button pricing-button-dark"
+              >
+                Ask About Airtime <ArrowRight size={17} />
+              </Link>
+            </article>
+          </div>
+
+          <div className="pricing-cost-note">
+            <CircleHelp size={20} />
+
+            <p>
+              Airtime is billed separately according to usage.
+              Confirm additional charges, integrations, and
+              package-specific inclusions with our team before
+              subscribing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          WHAT YOU WILL GET — ICON CARDS
+      ===================================================== */}
+      <section className="pricing-benefits-section">
+        <div className="pricing-container">
+          <div className="pricing-section-heading">
+            <span className="pricing-eyebrow">
+              MORE THAN A PHONE NUMBER
+            </span>
+
+            <h2>
               Everything Your Business Needs
             </h2>
 
-            <p className="mt-5 leading-8 text-neutral-600">
-              Powerful communication tools designed to keep your team
-              connected, productive and focused on your customers.
+            <p>
+              Explore the communication tools and capabilities
+              designed to help your team manage customer
+              interactions more effectively.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <article
-                key={feature.title}
-                className="group rounded-2xl border border-neutral-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-red-400 hover:shadow-lg"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-2xl text-red-600 transition group-hover:bg-red-600 group-hover:text-white">
-                  {feature.icon}
-                </div>
+          <div className="pricing-benefits-grid">
+            {pricingFeatures.map((feature) => {
+              const Icon = feature.icon;
 
-                <h3 className="mt-5 text-lg font-bold">
-                  {feature.title}
-                </h3>
+              return (
+                <article
+                  className="pricing-benefit-card"
+                  key={feature.number}
+                >
+                  <div className="pricing-benefit-top">
+                    <span className="pricing-benefit-number">
+                      {feature.number}
+                    </span>
 
-                <p className="mt-3 text-sm leading-7 text-neutral-600">
-                  {feature.description}
+                    <span className="pricing-benefit-icon">
+                      <Icon
+                        size={27}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+
+                  <h3>{feature.title}</h3>
+
+                  <p>{feature.description}</p>
+
+                  <div className="pricing-benefit-bottom">
+                    <span>Explore capabilities</span>
+
+                    <span className="pricing-benefit-arrow">
+                      <ArrowRight
+                        size={17}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <p className="pricing-features-note">
+            Feature availability depends on the selected package
+            and supported integrations. Contact us to confirm
+            which features are available for your business.
+          </p>
+        </div>
+      </section>
+
+      {/* =====================================================
+          VALUE SECTION
+      ===================================================== */}
+      <section className="pricing-value-section">
+        <div className="pricing-container pricing-value-grid">
+          <div className="pricing-value-heading">
+            <span className="pricing-eyebrow">
+              BUILT AROUND YOUR TEAM
+            </span>
+
+            <h2>
+              One Number.
+              <br />
+              One Platform.
+              <br />
+              Better Connections.
+            </h2>
+          </div>
+
+          <div className="pricing-value-content">
+            <div className="pricing-value-item">
+              <span className="pricing-value-icon">
+                <Headphones size={23} />
+              </span>
+
+              <div>
+                <h3>Connect with customers</h3>
+
+                <p>
+                  Bring business calling into a more organized
+                  communication workflow.
                 </p>
-              </article>
+              </div>
+            </div>
+
+            <div className="pricing-value-item">
+              <span className="pricing-value-icon">
+                <ChartNoAxesCombined size={23} />
+              </span>
+
+              <div>
+                <h3>Understand your activity</h3>
+
+                <p>
+                  Use available call information and reports to
+                  gain visibility into customer interactions.
+                </p>
+              </div>
+            </div>
+
+            <div className="pricing-value-item">
+              <span className="pricing-value-icon">
+                <ShieldCheck size={23} />
+              </span>
+
+              <div>
+                <h3>Organize your operations</h3>
+
+                <p>
+                  Help your team coordinate communication
+                  responsibilities and customer follow-ups.
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href="/solutions/"
+              className="pricing-text-link"
+            >
+              Discover Our Solutions <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          FREQUENTLY ASKED QUESTIONS
+      ===================================================== */}
+      <section className="pricing-faq-section">
+        <div className="pricing-container">
+          <div className="pricing-section-heading">
+            <span className="pricing-eyebrow">
+              NEED CLARITY?
+            </span>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <p>
+              Learn more about our pricing, setup, and
+              communication services.
+            </p>
+          </div>
+
+          <div className="pricing-faq-list">
+            {pricingFaqs.map((faq) => (
+              <details
+                className="pricing-faq-item"
+                key={faq.question}
+              >
+                <summary>
+                  <span>{faq.question}</span>
+
+                  <span className="pricing-faq-toggle">
+                    +
+                  </span>
+                </summary>
+
+                <p>{faq.answer}</p>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Closing message */}
-      <section className="px-6 py-16 sm:px-10 lg:py-24">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-black px-7 py-14 text-center sm:px-12 sm:py-16">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-400">
-            READY TO TAKE CONTROL?
+      {/* =====================================================
+          FINAL CALL TO ACTION
+      ===================================================== */}
+      <section className="pricing-cta-section">
+        <div className="pricing-container">
+          <span className="pricing-eyebrow">
+            READY TO GET CONNECTED?
+          </span>
+
+          <h2>Make Every Call Count.</h2>
+
+          <p>
+            Let's discuss your team, communication needs, and
+            the right setup for your business.
           </p>
 
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-5xl">
-            Make Every Call Count.
-          </h2>
+          <div className="pricing-hero-actions">
+            <Link
+              href="/contact/"
+              className="pricing-button pricing-button-light"
+            >
+              Talk to Our Team <ArrowRight size={18} />
+            </Link>
 
-          <p className="mx-auto mt-5 max-w-2xl leading-8 text-neutral-300">
-            Give your business one connected communication experience
-            with Ring Flow Technologies.
-          </p>
-
-          <Link
-            href="/contact"
-            className="mt-9 inline-flex min-h-14 items-center justify-center gap-3 rounded-xl bg-red-600 px-7 py-4 font-bold text-white transition hover:bg-red-700"
-          >
-            Contact Us Today <span aria-hidden="true">→</span>
-          </Link>
-
-          <p className="mt-8 text-sm font-medium tracking-wide text-neutral-400">
-            One number. One platform. Total control.
-          </p>
-
-          <p className="mt-2 text-sm text-neutral-500">
-            Grow your business with every call.
-          </p>
-        </div>
-      </section>
-
-      {/* Page footer */}
-      <footer className="border-t border-neutral-200 bg-white px-6 py-8 sm:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
-          <div>
-            <p className="font-bold text-black">
-              Ring Flow Technologies
-            </p>
-            <p className="mt-1 text-sm text-neutral-500">
-              One number. One platform. Total control.
-            </p>
+            <a
+              href="https://wa.me/254700093587?text=Hello%20Ring%20Flow%20Technologies%2C%20I%20would%20like%20to%20discuss%20your%20pricing."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pricing-button pricing-button-whatsapp"
+            >
+              <MessageCircle size={18} />
+              Chat on WhatsApp
+            </a>
           </div>
 
-          <p className="text-sm text-neutral-500">
-            © 2026 Ring Flow Technologies. All Rights Reserved.
-          </p>
+          <div className="pricing-cta-contact">
+            <a href="tel:+254700093587">
+              <Phone size={16} />
+              0700 093 587
+            </a>
+
+            <a href="mailto:info@ringflow.co.ke">
+              info@ringflow.co.ke
+            </a>
+          </div>
         </div>
-      </footer>
+      </section>
     </main>
   );
 }

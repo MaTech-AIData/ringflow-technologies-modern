@@ -1,28 +1,46 @@
+
+import Link from "next/link";
+import { assetPath } from "@/lib/site";
+
 export default function SiteHeader() {
   return (
     <header className="site-header">
-      <a href="/" className="brand">
+      {/* BRAND LOGO AND NAME */}
+      <Link
+        href="/"
+        className="brand"
+        aria-label="RingFlow Technologies home"
+      >
         <img
-          src="/ringflow_logo.png"
+          src={assetPath("ringflow_logo.png")}
           alt="Ring Flow Technologies logo"
           className="brand-logo"
         />
 
         <span className="brand-name">
-          <span className="brand-title">RING FLOW</span>
-          <span className="brand-subtitle">TECHNOLOGIES</span>
+          <span className="brand-title">RINGFLOW</span>
+          <span className="brand-subtitle">
+            TECHNOLOGIES
+          </span>
         </span>
-      </a>
+      </Link>
 
-      <nav className="main-nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/solutions">Our Solutions</a>
-        <a href="/pricing">Pricing</a>
+      {/* MAIN NAVIGATION */}
+      <nav
+        className="main-nav"
+        aria-label="Main navigation"
+      >
+        <Link href="/">Home</Link>
+        <Link href="/about/">About Us</Link>
+        <Link href="/solutions/">Our Solutions</Link>
+        <Link href="/pricing/">Pricing</Link>
 
-        <a href="/contact" className="nav-contact">
+        <Link
+          href="/contact/"
+          className="nav-contact"
+        >
           Contact Us
-        </a>
+        </Link>
       </nav>
     </header>
   );

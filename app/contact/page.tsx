@@ -2,386 +2,560 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
 
-const contactDetails = [
-  {
-    icon: "☎",
-    title: "Call Us",
-    description: "Speak with our team about your needs.",
-    value: "0700093587",
-    action: "Call us now",
-    href: "tel:+254700093587",
-    color: "bg-red-50 text-red-600",
-  },
-  {
-    icon: "✆",
-    title: "WhatsApp Us",
-    description: "Chat with our team directly.",
-    value: "0700093587",
-    action: "Chat on WhatsApp",
-    href: "https://wa.me/254700093587",
-    color: "bg-green-50 text-green-700",
-  },
-  {
-    icon: "✉",
-    title: "Email Us",
-    description: "Send us your questions or enquiries.",
-    value: "info@ringflow.co.ke",
-    action: "Send an email",
-    href: "mailto:info@ringflow.co.ke",
-    color: "bg-red-50 text-red-600",
-  },
-  {
-    icon: "⌖",
-    title: "Visit Our Office",
-    description: "We would be happy to hear from you.",
-    value: "Mizpah Office Park, Kahawa Sukari, Floor 3, Room 6",
-    action: "Get directions",
-    href: "https://www.google.com/maps/search/?api=1&query=Mizpah+Office+Park+Kahawa+Sukari",
-    color: "bg-neutral-100 text-neutral-900",
-  },
-];
+const PHONE_DISPLAY = "0700 093 587";
+const PHONE_LINK = "+254700093587";
+const WHATSAPP_LINK = "254700093587";
+
+const EMAIL_PRIMARY = "info@ringflow.co.ke";
+const EMAIL_SECONDARY = "ringflowtechnologies@gmail.com";
+
+const OFFICE_ADDRESS =
+  "Mizpah Office Park, 3rd Floor, Room 6, opposite Quickmart, Kahawa Sukari, Kenya";
+
+const MAPS_LINK =
+  "https://www.google.com/maps/search/?api=1&query=Mizpah+Office+Park+Kahawa+Sukari+Kenya";
+
+const WHATSAPP_MESSAGE =
+  "Hello Ring Flow Technologies, I would like to enquire about your services.";
+
+const WHATSAPP_URL =
+  `https://wa.me/${WHATSAPP_LINK}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+const supabase =
+  supabaseUrl && supabaseKey
+    ? createClient(supabaseUrl, supabaseKey)
+    : null;
 
 export default function ContactPage() {
-  const [notice, setNotice] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setStatus(null);
 
-    setNotice(
-      "Your form is not connected to a submission service yet. Please contact us directly by WhatsApp or email."
-    );
+    if (!supabase) {
+      setStatus({
+        type: "error",
+        message:
+          "Our online enquiry form is temporarily unavailable. Please contact us through WhatsApp or email.",
+      });
+      return;
+    }
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!name || !email || !subject || !message) {
+      setStatus({
+        type: "error",
+        message: "Please complete all required fields.",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from("contact_submissions")
+        .insert([
+          {
+            name,
+            email,
+            phone: phone || null,
+            company: company || null,
+            subject,
+            message,
+          },
+        ]);
+
+      if (error) {
+        console.error("Supabase contact form error:", error);
+
+        setStatus({
+          type: "error",
+          message:
+            "We could not submit your enquiry. Please try again or contact us directly.",
+        });
+
+        return;
+      }
+
+      form.reset();
+
+      setStatus({
+        type: "success",
+        message:
+          "Thank you! Your enquiry has been submitted successfully. We look forward to speaking with you.",
+      });
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+
+      setStatus({
+        type: "error",
+        message:
+          "Something went wrong. Please try again or contact us using WhatsApp or email.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-black">
-      {/* HERO */}
-      <section className="relative bg-black px-5 py-20 text-white sm:py-24">
-        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-red-600/20 blur-3xl" />
+    <main className="contact-page">
+      {/* HERO SECTION */}
+      <section className="contact-hero">
+        <div className="contact-hero-glow contact-hero-glow-one" />
+        <div className="contact-hero-glow contact-hero-glow-two" />
 
-        <div className="relative mx-auto max-w-7xl">
-          <p className="mb-4 font-semibold uppercase tracking-[0.25em] text-red-500">
-            Contact Ring Flow Technologies
-          </p>
+        <div className="contact-hero-inner">
+          <span className="contact-eyebrow">
+            LET&apos;S CONNECT
+          </span>
 
-          <h1 className="max-w-3xl text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-            Let&apos;s Get Your Business{" "}
-            <span className="text-red-500">Connected.</span>
+          <h1>
+            Every conversation
+            <span> starts here.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-base leading-7 text-neutral-300 sm:text-lg">
-            Have a question about our business communication solutions?
-            We are ready to help your team connect with customers, manage
-            calls, and work smarter.
+          <p>
+            Tell us what your business needs. Whether you want better
+            call management, organised leads, or connected customer
+            conversations, Ring Flow Technologies is ready to help.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="contact-hero-actions">
             <a
-              href="https://wa.me/254700093587"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
+              href="#contact-form"
+              className="contact-primary-button"
             >
-              WhatsApp Our Team
+              Send an Enquiry <span aria-hidden="true">→</span>
             </a>
 
             <a
-              href="tel:+254700093587"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/30 px-6 py-3 font-bold text-white transition hover:border-red-500 hover:bg-white/10"
+              href={WHATSAPP_URL}
+              className="contact-secondary-button"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Call Us Now
+              Chat on WhatsApp ↗
             </a>
           </div>
         </div>
       </section>
 
-      {/* CONTACT DETAILS */}
-      <section className="px-5 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
-            <p className="font-bold uppercase tracking-widest text-red-600">
-              We Are Here for You
+      {/* CONTACT DETAILS AND FORM */}
+      <section className="contact-main-section">
+        <div className="contact-layout">
+
+          {/* LEFT: CONTACT INFORMATION */}
+          <aside className="contact-info-panel">
+            <span className="contact-eyebrow">
+              CONTACT OUR TEAM
+            </span>
+
+            <h2>Let&apos;s talk about your business.</h2>
+
+            <p className="contact-info-intro">
+              Choose the most convenient way to reach us. Call, send
+              an email, chat on WhatsApp, or visit our office.
             </p>
 
-            <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">
-              Get in Touch
-            </h2>
+            <div className="contact-info-list">
 
-            <p className="mt-4 leading-7 text-neutral-600">
-              Choose the easiest way to reach us. Call, chat on WhatsApp,
-              send an email, or visit our office.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {contactDetails.map((item) => (
-              <article
-                key={item.title}
-                className="flex min-w-0 flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-red-300 hover:shadow-lg"
-              >
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-xl text-3xl ${item.color}`}
+              {/* PHONE */}
+              <div className="contact-info-item">
+                <span
+                  className="contact-info-icon"
                   aria-hidden="true"
                 >
-                  {item.icon}
+                  ☎
+                </span>
+
+                <div className="contact-info-content">
+                  <h3>Call Our Team</h3>
+
+                  <p>
+                    Speak directly with us about your business needs
+                    and communication solutions.
+                  </p>
+
+                  <a
+                    href={`tel:${PHONE_LINK}`}
+                    className="contact-direct-link"
+                  >
+                    {PHONE_DISPLAY} →
+                  </a>
                 </div>
+              </div>
 
-                <h3 className="mt-5 text-xl font-bold">{item.title}</h3>
-
-                <p className="mt-2 text-sm leading-6 text-neutral-600">
-                  {item.description}
-                </p>
-
-                <p className="mt-4 break-words text-base font-bold leading-6 text-black">
-                  {item.value}
-                </p>
-
-                <a
-                  href={item.href}
-                  target={
-                    item.title === "WhatsApp Us" ||
-                    item.title === "Visit Our Office"
-                      ? "_blank"
-                      : undefined
-                  }
-                  rel={
-                    item.title === "WhatsApp Us" ||
-                    item.title === "Visit Our Office"
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="mt-5 inline-flex min-h-11 items-center font-bold text-red-600 transition hover:text-red-800 hover:underline"
+              {/* WHATSAPP */}
+              <div className="contact-info-item">
+                <span
+                  className="contact-info-icon"
+                  aria-hidden="true"
                 >
-                  {item.action} <span className="ml-2" aria-hidden="true">→</span>
-                </a>
-              </article>
-            ))}
-          </div>
-
-          {/* ADDITIONAL EMAIL */}
-          <div className="mt-6 rounded-xl border border-neutral-200 bg-neutral-50 p-5">
-            <p className="text-sm text-neutral-600">
-              Prefer our alternative email?
-            </p>
-            <a
-              href="mailto:ringflow@gmail.com"
-              className="mt-1 inline-block break-all font-bold text-red-600 hover:underline"
-            >
-              ringflow@gmail.com
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT FORM AND INFORMATION */}
-      <section className="bg-neutral-50 px-5 py-16 sm:py-20">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
-          {/* LEFT INFORMATION */}
-          <div className="min-w-0">
-            <p className="font-bold uppercase tracking-widest text-red-600">
-              Let&apos;s Talk Business
-            </p>
-
-            <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">
-              Tell Us What You Need
-            </h2>
-
-            <p className="mt-5 leading-7 text-neutral-600">
-              Whether you need business call management, team communication,
-              call monitoring, or an integrated communication solution,
-              Ring Flow Technologies is ready to discuss your needs.
-            </p>
-
-            <div className="mt-8 space-y-5">
-              <div className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-100 text-xl text-red-600">
-                  ✓
+                  W
                 </span>
-                <div>
-                  <h3 className="font-bold">Practical Solutions</h3>
-                  <p className="mt-1 text-sm leading-6 text-neutral-600">
-                    Solutions designed around your business communication
-                    needs.
+
+                <div className="contact-info-content">
+                  <h3>WhatsApp</h3>
+
+                  <p>
+                    Send us a direct message to enquire about our
+                    services or request a quotation.
                   </p>
+
+                  <a
+                    href={WHATSAPP_URL}
+                    className="contact-direct-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Message us on WhatsApp ↗
+                  </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-100 text-xl text-red-600">
-                  ↗
+              {/* EMAIL ADDRESSES */}
+              <div className="contact-info-item">
+                <span
+                  className="contact-info-icon"
+                  aria-hidden="true"
+                >
+                  ✉
                 </span>
-                <div>
-                  <h3 className="font-bold">Better Customer Connections</h3>
-                  <p className="mt-1 text-sm leading-6 text-neutral-600">
-                    Keep track of customer conversations and help your team
-                    stay connected.
+
+                <div className="contact-info-content">
+                  <h3>Email Our Team</h3>
+
+                  <p>
+                    Send your business enquiry, questions, or request
+                    for a quotation.
                   </p>
+
+                  <a
+                    href={`mailto:${EMAIL_PRIMARY}`}
+                    className="contact-direct-link"
+                  >
+                    {EMAIL_PRIMARY}
+                  </a>
+
+                  <a
+                    href={`mailto:${EMAIL_SECONDARY}`}
+                    className="contact-direct-link contact-email-secondary"
+                  >
+                    {EMAIL_SECONDARY}
+                  </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-100 text-xl text-red-600">
-                  ◎
+              {/* PHYSICAL OFFICE */}
+              <div className="contact-info-item">
+                <span
+                  className="contact-info-icon"
+                  aria-hidden="true"
+                >
+                  ⌖
                 </span>
-                <div>
-                  <h3 className="font-bold">Support for Your Team</h3>
-                  <p className="mt-1 text-sm leading-6 text-neutral-600">
-                    Contact us to discuss your setup and requirements.
-                  </p>
+
+                <div className="contact-info-content">
+                  <h3>Visit Our Office</h3>
+
+                  <p>{OFFICE_ADDRESS}</p>
+
+                  <a
+                    href={MAPS_LINK}
+                    className="contact-direct-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Find Us on Google Maps ↗
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 rounded-xl border-l-4 border-red-600 bg-white p-5 shadow-sm">
-              <p className="font-bold">Every call matters.</p>
-              <p className="mt-1 text-sm leading-6 text-neutral-600">
-                One number. One platform. Total control.
+            {/* BRAND FOOTER IN CONTACT PANEL */}
+            <div className="contact-info-bottom">
+              <p>RING FLOW TECHNOLOGIES</p>
+
+              <h3>Every call matters.</h3>
+
+              <span>Simple. Connected. Powerful.</span>
+            </div>
+          </aside>
+
+          {/* RIGHT: ENQUIRY FORM */}
+          <section
+            className="contact-form-panel"
+            id="contact-form"
+          >
+            <div className="contact-form-heading">
+              <span className="contact-form-label">
+                SEND US A MESSAGE
+              </span>
+
+              <h2>How can we help?</h2>
+
+              <p>
+                Complete this form to tell us about your business
+                needs. Fields marked with * are required.
               </p>
             </div>
-          </div>
 
-          {/* RIGHT CONTACT FORM */}
-          <div className="min-w-0 rounded-2xl border border-neutral-200 bg-white p-5 shadow-lg sm:p-8">
-            <h2 className="text-2xl font-extrabold">Send Us a Message</h2>
+            <form
+              className="contact-form"
+              onSubmit={handleSubmit}
+            >
+              <div className="contact-field-grid">
 
-            <p className="mt-2 text-sm leading-6 text-neutral-600">
-              Tell us a little about your enquiry.
-            </p>
+                <div className="contact-field">
+                  <label htmlFor="contact-name">
+                    Full name *
+                  </label>
 
-            <form onSubmit={handleSubmit} className="mt-7 space-y-5">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block text-sm font-semibold"
-                >
-                  Your Name
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    placeholder="Your full name"
+                    autoComplete="name"
+                    maxLength={120}
+                    required
+                  />
+                </div>
+
+                <div className="contact-field">
+                  <label htmlFor="contact-email">
+                    Email address *
+                  </label>
+
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    maxLength={254}
+                    required
+                  />
+                </div>
+
+                <div className="contact-field">
+                  <label htmlFor="contact-phone">
+                    Phone number
+                  </label>
+
+                  <input
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Your phone number"
+                    autoComplete="tel"
+                    maxLength={40}
+                  />
+                </div>
+
+                <div className="contact-field">
+                  <label htmlFor="contact-company">
+                    Company name
+                  </label>
+
+                  <input
+                    id="contact-company"
+                    name="company"
+                    type="text"
+                    placeholder="Your business name"
+                    autoComplete="organization"
+                    maxLength={160}
+                  />
+                </div>
+              </div>
+
+              <div className="contact-field">
+                <label htmlFor="contact-subject">
+                  What do you need? *
                 </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
+
+                <select
+                  id="contact-subject"
+                  name="subject"
                   required
-                  placeholder="Enter your full name"
-                  className="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base text-black outline-none transition placeholder:text-neutral-400 focus:border-red-500 focus:ring-2 focus:ring-red-100"
-                />
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select an enquiry type
+                  </option>
+
+                  <option value="Book an Appointment">
+                    Book an Appointment
+                  </option>
+
+                  <option value="Business Communication">
+                    Busness Communication
+                  </option>
+
+                  <option value="WhatsApp and Instagram">
+                    WhatsApp and Instagram communication
+                  </option>
+
+                  <option value="Call & mesage Management">
+                    Call & Message management
+                  </option>
+
+                  <option value="Pricing and quotation">
+                    Pricing and quotation
+                  </option>
+
+                  <option value="Customer Support">
+                    Customer Support
+                  </option>
+
+                  <option value="Team Dashboard">
+                    Team dashboard
+                  </option>
+
+                  <option value="Request a demonstration">
+                    Request a Demonstration
+                  </option>
+
+                  <option value="Website development">
+                    Website development
+                  </option>
+
+                  <option value="Other enquiry">
+                    Other enquiry
+                  </option>
+                </select>
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-semibold"
-                >
-                  Email Address
+              <div className="contact-field">
+                <label htmlFor="contact-message">
+                  Your message *
                 </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  placeholder="you@example.com"
-                  className="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base text-black outline-none transition placeholder:text-neutral-400 focus:border-red-500 focus:ring-2 focus:ring-red-100"
-                />
-              </div>
 
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="mb-2 block text-sm font-semibold"
-                >
-                  Phone Number
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="Your phone number (optional)"
-                  className="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base text-black outline-none transition placeholder:text-neutral-400 focus:border-red-500 focus:ring-2 focus:ring-red-100"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="mb-2 block text-sm font-semibold"
-                >
-                  Your Message
-                </label>
                 <textarea
-                  id="message"
+                  id="contact-message"
                   name="message"
                   rows={5}
+                  placeholder="Tell us about your business and what you need..."
+                  maxLength={5000}
                   required
-                  placeholder="How can we help your business?"
-                  className="w-full resize-y rounded-lg border border-neutral-300 bg-white px-4 py-3 text-base text-black outline-none transition placeholder:text-neutral-400 focus:border-red-500 focus:ring-2 focus:ring-red-100"
                 />
               </div>
 
-              <button
-                type="submit"
-                className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-              >
-                Submit Enquiry
-              </button>
-
-              {notice && (
-                <p
+              {status && (
+                <div
+                  className={`contact-status contact-status-${status.type}`}
                   role="status"
-                  className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-800"
+                  aria-live="polite"
                 >
-                  {notice}
-                </p>
+                  {status.message}
+                </div>
               )}
 
-              <p className="text-xs leading-5 text-neutral-500">
-                The form is currently a visual front end and does not send
-                or save submissions. Connect it to your backend before
-                accepting enquiries through this form.
+              <button
+                className="contact-submit-button"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting
+                  ? "Sending your enquiry..."
+                  : "Submit Enquiry"}
+
+                {!isSubmitting && (
+                  <span aria-hidden="true">→</span>
+                )}
+              </button>
+
+              <p className="contact-privacy-note">
+                Your enquiry is submitted securely through our
+                configured contact form. Please provide only the
+                information needed to respond to your enquiry.
               </p>
             </form>
-          </div>
+
+            {/* ALTERNATIVE CONTACT BUTTONS */}
+            <div className="contact-alternative-actions">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-alternative-button contact-whatsapp-button"
+              >
+                Chat on WhatsApp
+              </a>
+
+              <a
+                href={`tel:${PHONE_LINK}`}
+                className="contact-alternative-button"
+              >
+                Call Us
+              </a>
+
+              <a
+                href={`mailto:${EMAIL_PRIMARY}`}
+                className="contact-alternative-button"
+              >
+                Email Us
+              </a>
+            </div>
+          </section>
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="bg-black px-5 py-16 text-center text-white sm:py-20">
-        <div className="mx-auto max-w-3xl">
-          <p className="font-bold uppercase tracking-widest text-red-500">
-            Ring Flow Technologies
+      {/* BOTTOM CALL TO ACTION */}
+      <section className="contact-bottom-cta">
+        <div>
+          <span className="contact-eyebrow">
+            READY TO GET STARTED?
+          </span>
+
+          <h2>Let&apos;s build better connections.</h2>
+
+          <p>
+            Discover communication solutions designed to help your
+            business connect with customers and manage conversations.
           </p>
-
-          <h2 className="mt-4 text-3xl font-extrabold sm:text-4xl">
-            Ready to Connect Your Business?
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-xl leading-7 text-neutral-300">
-            Talk to our team about a communication solution that fits
-            your business.
-          </p>
-
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href="https://wa.me/254700093587"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
-            >
-              Get in Touch
-            </a>
-
-            <Link
-              href="/"
-              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/30 px-6 py-3 font-bold text-white transition hover:bg-white/10"
-            >
-              Back to Home
-            </Link>
-          </div>
         </div>
+
+        <Link
+          href="/solutions/"
+          className="contact-cta-button"
+        >
+          Explore Our Solutions →
+        </Link>
       </section>
 
-
+      {/* FLOATING WHATSAPP BUTTON */}
+      <a
+        href={WHATSAPP_URL}
+        className="whatsapp-float"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Ring Flow Technologies on WhatsApp"
+      >
+        <span aria-hidden="true">W</span>
+        <span>Chat with us</span>
+      </a>
     </main>
   );
 }

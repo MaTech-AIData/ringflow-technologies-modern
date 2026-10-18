@@ -1,20 +1,35 @@
 
+import Link from "next/link";
+
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
-      <a href="/" className="footer-brand">
+      {/* FOOTER BRAND */}
+      <Link
+        href="/"
+        className="footer-brand"
+        aria-label="Ring Flow Technologies home"
+      >
         Ring Flow Technologies
-      </a>
+      </Link>
+
+      {/* BRAND TAGLINE */}
       <p>Every call matters.</p>
-      <div className="footer-links">
-        <a href="/about">About</a>
-        <a href="/solutions">Solutions</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/contact">Contact</a>
-      </div>
+
+      {/* FOOTER NAVIGATION */}
+      <nav
+        className="footer-links"
+        aria-label="Footer navigation"
+      >
+        <Link href="/about/">About</Link>
+        <Link href="/solutions/">Solutions</Link>
+        <Link href="/pricing/">Pricing</Link>
+        <Link href="/contact/">Contact</Link>
+      </nav>
+
+      {/* COPYRIGHT */}
       <small>
-        © 2026 Ring Flow Technologies.
-        All rights reserved.
+        © 2026 Ring Flow Technologies. All rights reserved.
       </small>
     </footer>
   );

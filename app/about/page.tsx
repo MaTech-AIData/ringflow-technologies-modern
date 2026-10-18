@@ -1,4 +1,12 @@
+
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About Us | Ring Flow Technologies",
+  description:
+    "Discover Ring Flow Technologies, our mission, vision, values, and connected business communication solutions.",
+};
 
 const companyValues = [
   {
@@ -36,6 +44,44 @@ const services = [
   "Team shift management",
 ];
 
+const reasons = [
+  {
+    number: "01",
+    title: "Track Every Call",
+    description:
+      "See incoming and outgoing calls and stay informed about your team's communication.",
+    icon: "📞",
+  },
+  {
+    number: "02",
+    title: "Manage Your Leads",
+    description:
+      "Allocate market leads and track whether customers have been contacted.",
+    icon: "🎯",
+  },
+  {
+    number: "03",
+    title: "Centralize Conversations",
+    description:
+      "Bring WhatsApp, Instagram and business communication together.",
+    icon: "💬",
+  },
+  {
+    number: "04",
+    title: "Stronger Team Coordination",
+    description:
+      "Support team workflows and shift coordination so responsibilities are clearer and customer enquiries can be handled more consistently.",
+    icon: "⌘",
+  },
+  {
+    number: "05",
+    title: "Gain Business Insights",
+    description:
+      "Understand your team's communication and use information to improve customer service.",
+    icon: "📊",
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white text-black">
@@ -58,21 +104,20 @@ export default function AboutPage() {
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-neutral-300">
-              We help businesses organize their communication, connect their
-              teams, and manage customer interactions through modern
-              communication solutions.
+              Ringflow Technologies is a smart call and communication management solution that gives you
+              complete visibility and control over your business communications.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/our-solutions"
+                href="/solutions/"
                 className="rounded-xl bg-red-600 px-6 py-3 font-bold text-white transition hover:bg-red-700"
               >
                 Explore Our Solutions
               </Link>
 
               <Link
-                href="/contact"
+                href="/contact/"
                 className="rounded-xl border border-white/30 px-6 py-3 font-bold text-white transition hover:border-red-500 hover:bg-white/10"
               >
                 Contact Us
@@ -91,7 +136,7 @@ export default function AboutPage() {
 
             <p className="mt-4 leading-7 text-neutral-300">
               Bring calls, customer conversations, lead tracking, and team
-              coordination into one connected working experience.
+              coordination into a more connected working experience.
             </p>
 
             <div className="mt-7 space-y-3">
@@ -105,14 +150,14 @@ export default function AboutPage() {
               <div className="rounded-xl border border-white/5 bg-neutral-900 p-4">
                 <p className="font-semibold">Customer Conversations</p>
                 <p className="mt-1 text-sm text-neutral-400">
-                  Keep digital communication organized.
+                  Organise digital communication and enquiries.
                 </p>
               </div>
 
               <div className="rounded-xl border border-white/5 bg-neutral-900 p-4">
                 <p className="font-semibold">Team Coordination</p>
                 <p className="mt-1 text-sm text-neutral-400">
-                  Monitor activity and coordinate team workflows.
+                  Support team workflows and customer follow-ups.
                 </p>
               </div>
             </div>
@@ -133,19 +178,19 @@ export default function AboutPage() {
             </p>
 
             <h2 className="mt-4 text-3xl font-extrabold md:text-4xl">
-              Every call matters.
+              Ringflow Technologies.
             </h2>
 
             <p className="mt-6 leading-8 text-neutral-600">
               Ring Flow Technologies focuses on helping businesses manage
-              communication in a more organized and efficient way. We believe
+              communication in a more organised and efficient way. We believe
               that every call, message, and customer interaction is an
               opportunity to build a stronger relationship.
             </p>
 
             <p className="mt-4 leading-8 text-neutral-600">
               Our approach brings business communication and team management
-              together, helping organizations improve visibility, coordinate
+              together, helping organisations improve visibility, coordinate
               their activities, and focus on their customers.
             </p>
           </div>
@@ -161,8 +206,8 @@ export default function AboutPage() {
 
             <p className="mt-4 leading-7 text-neutral-600">
               We aim to help businesses stay connected, manage customer
-              interactions, and create a more coordinated experience for
-              their teams and customers.
+              interactions, and create a more coordinated experience for their
+              teams and customers.
             </p>
 
             <div className="mt-8 border-t border-neutral-200 pt-6">
@@ -172,6 +217,57 @@ export default function AboutPage() {
               </p>
               <p className="mt-1 text-2xl font-extrabold">Total control.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY RING FLOW */}
+      <section className="why-ringflow-section">
+        <div className="why-ringflow-inner">
+          <div className="why-ringflow-heading">
+            <span className="why-ringflow-eyebrow">WHY RING FLOW?</span>
+
+            <h2>
+              Turn Every Customer Conversation .
+              <span> Into an Opportunity.</span>
+            </h2>
+
+            <p>
+              Ringflow Technologies gives businesses beter visibility, control and accountability
+              over their customer communication.
+            </p>
+          </div>
+
+          <div className="why-ringflow-grid">
+            {reasons.map((reason) => (
+              <article className="why-ringflow-card" key={reason.number}>
+                <div className="why-ringflow-card-top">
+                  <span className="why-ringflow-icon" aria-hidden="true">
+                    {reason.icon}
+                  </span>
+                  <span className="why-ringflow-number">
+                    {reason.number}
+                  </span>
+                </div>
+
+                <h3>{reason.title}</h3>
+                <p>{reason.description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="why-ringflow-bottom">
+            <div>
+              <h3>Make every interaction count.</h3>
+              <p>
+                Discover how a more connected communication workflow could
+                support your business.
+              </p>
+            </div>
+
+            <Link href="/solutions/" className="why-ringflow-button">
+              Discover Our Solutions <span aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -218,7 +314,7 @@ export default function AboutPage() {
 
               <p className="mt-4 leading-8 text-neutral-300">
                 To become a trusted provider of modern business communication
-                solutions, helping organizations build stronger customer
+                solutions, helping organisations build stronger customer
                 relationships and grow through connected technology.
               </p>
             </article>
@@ -261,7 +357,7 @@ export default function AboutPage() {
 
           <div className="mt-9 text-center">
             <Link
-              href="/our-solutions"
+              href="/solutions/"
               className="inline-flex rounded-xl bg-black px-7 py-3.5 font-bold text-white transition hover:bg-red-600"
             >
               View All Solutions
@@ -317,32 +413,13 @@ export default function AboutPage() {
           </p>
 
           <Link
-            href="/contact"
+            href="/contact/"
             className="mt-8 inline-flex rounded-xl bg-black px-7 py-3.5 font-bold text-white transition hover:bg-neutral-900"
           >
             Contact Our Team
           </Link>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="bg-black px-6 py-8 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-          <div>
-            <p className="text-lg font-extrabold">
-              Ring Flow <span className="text-red-500">Technologies</span>
-            </p>
-
-            <p className="mt-1 text-sm text-neutral-400">
-              One number. One platform. Total control.
-            </p>
-          </div>
-
-          <p className="text-sm text-neutral-400">
-            © 2026 Ring Flow Technologies. All Rights Reserved.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }
