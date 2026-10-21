@@ -13,9 +13,13 @@ export const metadata: Metadata = {
     "One business number. Total control. Manage calls, leads, WhatsApp conversations and customer communications with Ring Flow Technologies.",
 
   icons: {
-    icon: "/ringflow-favicon.png",
+    icon: [
+      {
+        url: "/ringflow-favicon.png",
+        type: "image/png",
+      },
+    ],
     shortcut: "/ringflow-favicon.png",
-    apple: "/ringflow-favicon.png",
   },
 };
 
