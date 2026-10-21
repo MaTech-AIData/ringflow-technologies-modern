@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
@@ -9,8 +8,15 @@ export const metadata: Metadata = {
     default: "Ring Flow Technologies",
     template: "%s | Ring Flow Technologies",
   },
+
   description:
     "One business number. Total control. Manage calls, leads, WhatsApp conversations and customer communications with Ring Flow Technologies.",
+
+  icons: {
+    icon: "/ringflow-favicon.png",
+    shortcut: "/ringflow-favicon.png",
+    apple: "/ringflow-favicon.png",
+  },
 };
 
 export default function RootLayout({
